@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:font-family="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Album Creator</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="/style.css" rel="stylesheet" type="text/css"/>
+    <script src="/album.js"></script>
+</head>
+<body>
+<div id="root">
+    <div id="buttons"></div>
+    <div id="page">
+        <div id="sidebar">
+            <div id="fixed-inner">
+                <div id="customizations-container"></div>
+                <div id="search-container">
+                    <div>
+                        <select id="select-type">
+                            <option value="music">음악</option>
+                            <option value="movies">영화</option>
+                            <option value="dramas">드라마</option>
+                            <option value="person">가수 및 배우</option>
+                            <option value="webtoon">웹툰</option>
+                            <!--                            <option value="games">Games</option>-->
+
+                        </select>&nbsp;
+                        <form id="new-search-container" style="display: flex; padding: 0px;">
+                            <input
+                                    id="search-bar" type="search" placeholder="Album, artist, or URL"
+                                    style="flex-grow: 1;">
+                            <input type="submit" value="Search">
+                        </form>
+                    </div>
+                </div>
+                <div id="grow">
+                    <!--  여기에 이미지들 추가 -->
+                </div>
+
+
+            </div>
+
+        </div>ㄴ
+        <div id="chart wrapper" class="container-40"
+             style="background: center center rgb(0,0,0); font-family: monospace, sans-serif; transform: scale(1.03113);">
+            <div id="chart" class="" style="width: 798px">
+<!--                옵션에 따라 추가-->
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
