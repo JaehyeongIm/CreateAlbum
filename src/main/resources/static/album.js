@@ -1,4 +1,47 @@
 $(document).ready(function () {
+    $(document).on('dragstart', '.art', function (event) {
+        event.originalEvent.dataTransfer.setData('text/plain', event.target.outerHTML);
+    });
+    $('#chart-wrapper').on('dragover', function (event) {
+        event.preventDefault(); // Necessary to allow dropping.
+    });
+
+    $('#chart-wrapper').on('drop', function (event) {
+        event.preventDefault();
+        var data = event.originalEvent.dataTransfer.getData('text/plain');
+        $('#chart').append(data); // Append the image to the chart.
+    });
+    // Detect drag start on images inside #chart
+    $('#chart').on('dragstart', '.art', function (event) {
+        event.originalEvent.dataTransfer.setData('text/plain', event.target.id);
+    });
+    $('#chart').on('dragover', '.art', function (event) {
+        event.preventDefault(); // Necessary to allow dropping.
+    });
+
+    // Handle drop on #chart-wrapper
+    $('#page').on('drop', function (event) {
+        event.preventDefault();
+        var droppedElementId = event.originalEvent.dataTransfer.getData('text/plain');
+        var $droppedElement = $('#' + droppedElementId);
+
+        // Check if drop occurs in the margin area of #chart-wrapper
+        if (!$droppedElement.closest('#chart').length) {
+            $droppedElement.remove(); // Remove the image
+        }
+    });
+    // 다운로드 관련 코드
+    // function download(){
+    //     domtoimage.toBlob(document.getElementById('my-node'))
+    //         .then(function (blob) {
+    //             window.saveAs(blob, 'my-node.png');
+    //         });
+    // }
+    //
+    // document.getElementById('download-png').addEventListener("click", download);
+
+
+
     $("#new-search-container").submit(function (event) {
         event.preventDefault();
 
@@ -143,20 +186,19 @@ $(document).ready(function () {
                 }
             });
 
-        }
-        else if(selectedType==="webtoon"){
+        } else if (selectedType === "webtoon") {
             url = `https://korea-webtoon-api.herokuapp.com/search?keyword=${searchTerm}`
             $.ajax({
                 url: url,
                 type: 'GET',
                 success: function (response) {
-                    response.webtoons.forEach(webtoon=>{
-                        var imageUrl = webtoon.img
-                        var albumHtml = '<div class="art" draggable="true">' +
-                            '<div class="inner" style="background-image: url(' + imageUrl + '); width: 130px; height: 130px;"></div>' +
-                            '</div>';
-                        $("#grow").append(albumHtml);
-                        console.log("웹툰 완료")
+                    response.webtoons.forEach(webtoon => {
+                            var imageUrl = webtoon.img
+                            var albumHtml = '<div class="art" draggable="true">' +
+                                '<div class="inner" style="background-image: url(' + imageUrl + '); width: 130px; height: 130px;"></div>' +
+                                '</div>';
+                            $("#grow").append(albumHtml);
+                            console.log("웹툰 완료")
                         }
                     )
 

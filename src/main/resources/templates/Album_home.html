@@ -5,16 +5,22 @@
     <title>Album Creator</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="/style.css" rel="stylesheet" type="text/css"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
     <script src="/album.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+
 </head>
 <body>
-<div id="root">
-    <div id="buttons"></div>
+<div id="root" class="container-fluid">
+    <div id="buttons" class="position-absolute top-0 end-0">
+        <form>
+            <button id="download-png" data-format="png" type="submit" class="btn btn-primary">Download PNG</button>
+            <button id="download-jpg" data-format="jpg" type="submit" class="btn btn-secondary">Download JPG</button>
+        </form>
+    </div>
     <div id="page">
-        <div id="sidebar">
-            <div id="fixed-inner">
-                <div id="customizations-container"></div>
+        <div id="sidebar" >
+            <div id="fixed-inner" >
                 <div id="search-container">
                     <div>
                         <select id="select-type">
@@ -43,77 +49,10 @@
 
         </div>
 
-        <div id="chart-wrapper" class="container-25"
+        <div id="chart-wrapper" class="position-absolute top-50 start-50 translate-middle"
              style="background: center center rgb(0,0,0); font-family: monospace, sans-serif; transform: scale(1.33);">
-            <div id="chart" class=" " style="width: 624px;">
-                <div class="card-row size-150 align-center">
-                    <div class="card white" style="opacity: 1; padding: 3px;" draggable="true">
-                        <div class="inner"></div>
-                    </div>
-                    <span class="zero"> </span>
-                    <div class="card white" style="opacity: 1; padding: 3px;" draggable="true">
-                        <div class="inner"></div>
-                    </div>
-                    <span class="zero"> </span>
-                    <div class="card white" style="opacity: 1; padding: 3px;" draggable="true">
-                        <div class="inner"></div>
-                    </div>
-                    <span class="zero"> </span>
-                    <div class="card white" style="opacity: 1; padding: 3px;" draggable="true">
-                        <div class="inner"></div>
-                    </div>
-                </div>
-                <div class="card-row size-150 align-center">
-                    <div class="card white" style="opacity: 1; padding: 3px;" draggable="true">
-                        <div class="inner"></div>
-                    </div>
-                    <span class="zero"> </span>
-                    <div class="card white" style="opacity: 1; padding: 3px;" draggable="true">
-                        <div class="inner"></div>
-                    </div>
-                    <span class="zero"> </span>
-                    <div class="card white" style="opacity: 1; padding: 3px;" draggable="true">
-                        <div class="inner"></div>
-                    </div>
-                    <span class="zero"> </span>
-                    <div class="card white" style="opacity: 1; padding: 3px;" draggable="true">
-                        <div class="inner"></div>
-                    </div>
-                </div>
-                <div class="card-row size-150 align-center">
-                    <div class="card white" style="opacity: 1; padding: 3px;" draggable="true">
-                        <div class="inner"></div>
-                    </div>
-                    <span class="zero"> </span>
-                    <div class="card white" style="opacity: 1; padding: 3px;" draggable="true">
-                        <div class="inner"></div>
-                    </div>
-                    <span class="zero"> </span>
-                    <div class="card white" style="opacity: 1; padding: 3px;" draggable="true">
-                        <div class="inner"></div>
-                    </div>
-                    <span class="zero"> </span>
-                    <div class="card white" style="opacity: 1; padding: 3px;" draggable="true">
-                        <div class="inner"></div>
-                    </div>
-                </div>
-                <div class="card-row size-150 align-center">
-                    <div class="card white" draggable="true" style="opacity: 1; padding: 3px;">
-                        <div class="inner"></div>
-                    </div>
-                    <span class="zero"> </span>
-                    <div class="card white" draggable="true" style="opacity: 1; padding: 3px;">
-                        <div class="inner"></div>
-                    </div>
-                    <span class="zero"> </span>
-                    <div class="card white" draggable="true" style="opacity: 1; padding: 3px;">
-                        <div class="inner"></div>
-                    </div>
-                    <span class="zero"> </span>
-                    <div class="card white" draggable="true" style="opacity: 1; padding: 3px;">
-                        <div class="inner"></div>
-                    </div>
-                </div>
+
+            <div id="chart" class="" style="width: 624px;">
             </div>
             <ul id="titles" class=""></ul>
         </div>

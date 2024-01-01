@@ -21,6 +21,7 @@ div {
 }
 
 .art > .inner {
+
     background-size: cover;
     height: 100%;
     overflow: hidden;
@@ -70,18 +71,16 @@ ul {
     width: 150px;
     margin:3px;
 }
-#chart-wrapper {
-    margin: 35px 45px 45px 300px;
-    z-index: 1;
-    padding: 25px;
-    position: absolute;
-    -webkit-transform-origin: 0 0 0;
-    transform-origin: 0 0 0;
-    display: table;
-    border: 1px solid #999;
-    background-size: cover!important;
-    background-position: 50%!important;
-}
+/*#chart-wrapper {*/
+/*    margin: 35px 45px 45px 300px;*/
+/*    z-index: 1;*/
+/*    padding: 25px;*/
+/*    position: absolute;*/
+/*    -webkit-transform-origin: 0 0 0;*/
+/*    transform-origin: 0 0 0;*/
+/*    display: table;*/
+/*    border: 1px solid #999;*/
+/*}*/
 .align-center {
     text-align: center;
 }
