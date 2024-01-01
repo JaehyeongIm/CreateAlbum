@@ -9,6 +9,7 @@ $(document).ready(function () {
     $('#chart-wrapper').on('drop', function (event) {
         event.preventDefault();
         var data = event.originalEvent.dataTransfer.getData('text/plain');
+
         $('#chart').append(data); // Append the image to the chart.
     });
     // Detect drag start on images inside #chart
