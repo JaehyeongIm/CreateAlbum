@@ -2,44 +2,50 @@ $(document).ready(function () {
     $(document).on('dragstart', '.art', function (event) {
         event.originalEvent.dataTransfer.setData('text/plain', event.target.outerHTML);
     });
-    $('#chart-wrapper').on('dragover', function (event) {
+    $('#chart').on('dragover', function (event) {
         event.preventDefault(); // Necessary to allow dropping.
     });
 
-    $('#chart-wrapper').on('drop', function (event) {
+    $('#chart').on('drop', function (event) {
         event.preventDefault();
         var data = event.originalEvent.dataTransfer.getData('text/plain');
 
         $('#chart').append(data); // Append the image to the chart.
     });
-    // Detect drag start on images inside #chart
-    $('#chart').on('dragstart', '.art', function (event) {
-        event.originalEvent.dataTransfer.setData('text/plain', event.target.id);
-    });
-    $('#chart').on('dragover', '.art', function (event) {
-        event.preventDefault(); // Necessary to allow dropping.
-    });
 
-    // Handle drop on #chart-wrapper
-    $('#page').on('drop', function (event) {
-        event.preventDefault();
-        var droppedElementId = event.originalEvent.dataTransfer.getData('text/plain');
-        var $droppedElement = $('#' + droppedElementId);
-
-        // Check if drop occurs in the margin area of #chart-wrapper
-        if (!$droppedElement.closest('#chart').length) {
-            $droppedElement.remove(); // Remove the image
-        }
-    });
     // 다운로드 관련 코드
-    // function download(){
-    //     domtoimage.toBlob(document.getElementById('my-node'))
-    //         .then(function (blob) {
-    //             window.saveAs(blob, 'my-node.png');
-    //         });
-    // }
-    //
-    // document.getElementById('download-png').addEventListener("click", download);
+
+    function downloadpng(event) {
+        var node = document.getElementById('chart');
+        event.preventDefault();
+        domtoimage.toPng(node)
+            .then(function (dataUrl) {
+                // 이미지를 다운로드하기 위한 링크 요소를 생성합니다.
+                var link = document.createElement('a');
+                link.download = 'album.png'; // 다운로드될 파일명을 지정합니다.
+                link.href = dataUrl;
+                // 링크를 클릭하여 이미지를 다운로드합니다.
+                link.click();
+            })
+            .catch(function (error) {
+                console.error('오류가 발생했습니다.', error);
+            });
+    }
+    function downloadjpg(event) {
+        event.preventDefault();
+        domtoimage.toJpeg(document.getElementById('chart'), { quality: 0.95 })
+            .then(function (dataUrl) {
+                var link = document.createElement('a');
+                link.download = 'album.jpeg';
+                link.href = dataUrl;
+                link.click();
+            });
+    }
+
+    // 'download-png' ID를 가진 요소에 이벤트 리스너를 추가
+    document.getElementById('download-png').addEventListener("click", downloadpng);
+    document.getElementById('download-jpg').addEventListener("click", downloadjpg);
+
 
 
 
@@ -60,7 +66,7 @@ $(document).ready(function () {
                     response.results.albummatches.album.forEach(function (album) {
                         if (album.image[3] && album.image[3]['#text']) {
                             var albumHtml = '<div class="art" draggable="true">' +
-                                '<div class="inner" style="background-image: url(' + album.image[3]['#text'] + '); width: 130px; height: 130px;"></div>' +
+                                '<div class="inner" style="background-image: url(' + album.image[3]['#text'] + ');"></div>' +
                                 '</div>';
                             $("#grow").append(albumHtml);
                             console.log("음악 완료")
@@ -90,7 +96,7 @@ $(document).ready(function () {
                             game.screenshots.forEach(screenshot => {
                                 var imageUrl = "https:" + screenshot.url; // Adding "https:" because the URL in the response is protocol-relative
                                 var albumHtml = '<div class="art" draggable="true">' +
-                                    '<div class="inner" style="background-image: imageUrl; width: 130px; height: 130px;"></div>' +
+                                    '<div class="inner" style="background-image: imageUrl;"></div>' +
                                     '</div>';
                                 $("#grow").append(albumHtml);
                                 console.log("게임 완료")
@@ -117,7 +123,7 @@ $(document).ready(function () {
                         if (movie.poster_path && movie.poster_path.length > 0) {
                             var imageUrl = "https://image.tmdb.org/t/p/w500/" + movie.poster_path
                             var albumHtml = '<div class="art" draggable="true">' +
-                                '<div class="inner" style="background-image: url(' + imageUrl + '); width: 130px; height: 130px;"></div>' +
+                                '<div class="inner" style="background-image: url(' + imageUrl + ');"></div>' +
                                 '</div>';
                             $("#grow").append(albumHtml);
                             console.log("영화 완료")
@@ -145,7 +151,7 @@ $(document).ready(function () {
                         if (movie.poster_path && movie.poster_path.length > 0) {
                             var imageUrl = "https://image.tmdb.org/t/p/w500/" + movie.poster_path
                             var albumHtml = '<div class="art" draggable="true">' +
-                                '<div class="inner" style="background-image: url(' + imageUrl + '); width: 130px; height: 130px;"></div>' +
+                                '<div class="inner" style="background-image: url(' + imageUrl + ');"></div>' +
                                 '</div>';
                             $("#grow").append(albumHtml);
                             console.log("드라마 완료")
@@ -173,7 +179,7 @@ $(document).ready(function () {
                         if (person.profile_path && person.profile_path.length > 0) {
                             var imageUrl = "https://image.tmdb.org/t/p/w500/" + person.profile_path
                             var albumHtml = '<div class="art" draggable="true">' +
-                                '<div class="inner" style="background-image: url(' + imageUrl + '); width: 130px; height: 130px;"></div>' +
+                                '<div class="inner" style="background-image: url(' + imageUrl + ');"></div>' +
                                 '</div>';
                             $("#grow").append(albumHtml);
                             console.log("연예인 완료")
@@ -196,7 +202,7 @@ $(document).ready(function () {
                     response.webtoons.forEach(webtoon => {
                             var imageUrl = webtoon.img
                             var albumHtml = '<div class="art" draggable="true">' +
-                                '<div class="inner" style="background-image: url(' + imageUrl + '); width: 130px; height: 130px;"></div>' +
+                                '<div class="inner" style="background-image: url(' + imageUrl + ');"></div>' +
                                 '</div>';
                             $("#grow").append(albumHtml);
                             console.log("웹툰 완료")

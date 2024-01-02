@@ -1,7 +1,5 @@
 #sidebar {
-    min-width: 290px;
-    max-width: 290px;
-    width: 290px;
+    width: 280px;
     z-index: 2;
     font-size: 13px;
     padding: 3px;
@@ -17,14 +15,19 @@ div {
     float: left;
     width: 130px;
     height: 130px;
-    overflow: hidden;
+    justify-self: center; /* 수평 축에서 아이템을 셀의 가운데로 정렬 */
+    align-self: center;
+
+    background-size: cover; /* 사진이 셀을 꽉 채우도록 설정 */
+    background-position: center; /* 사진을 중앙에 위치시킵니다 */
+    background-repeat: no-repeat; /* 배경 사진이 반복되지 않도록 설정 */
 }
 
 .art > .inner {
     background-size: cover;
-    height: 100%;
-    overflow: hidden;
     background-position: 50%;
+    width: 100%; /* 너비를 그리드 셀의 100%로 설정 */
+    height: 100%; /* 높이를 그리드 셀의 100%로 설정 */
 }
 
 body, html {
@@ -40,59 +43,23 @@ body, html {
     max-height: 80vh;
 }
 #chart {
-    text-align: center;
-    float: left;
-    position: relative;
-    z-index: 1;
-    display: table-cell;
+    display: grid;
+    grid-template-columns: repeat(4, 130px); /* 4개의 열, 각각 130px */
+    grid-template-rows: repeat(4, 130px); /* 4개의 행, 각각 130px */
+    grid-gap: 0;
+    background-color: black;
+    position: fixed;
+    top: 40px;    /* 조상 요소의 상단으로부터 20px 아래에 위치 */
+    left: 400px;
+
+    width: calc(130px* 4); /* 전체 그리드의 너비를 계산 */
+    height: calc(130px * 4); /* 전체 그리드의 높이를 계산 */
+    justify-content: center; /* 그리드 아이템들을 가운데 정렬 */
+    align-content: center; /* 그리드 아이템들을 가운데 정렬 */
 }
-#titles {
-    position: relative;
-    margin-top: 0;
-    padding-left: 0;
-    list-style-type: none;
-    display: table-cell;
-    white-space: nowrap;
-    vertical-align: top;
-}
-ul {
-    display: block;
-    list-style-type: disc;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
-}
-.size-150 .card {
-    float:left;
-    height: 150px;
-    width: 150px;
-}
-#chart-wrapper {
-    margin: 35px 45px 45px 300px;
-    z-index: 1;
-    padding: 25px;
-    position: absolute;
-    -webkit-transform-origin: 0 0 0;
-    transform-origin: 0 0 0;
-    display: table;
-    border: 1px solid #999;
-    background-size: cover;
-    background-position: 50%;
-}
+
 .align-center {
     text-align: center;
 }
-.card-row {
-    width: 100%;
-}
-.card-row:after {
-    content: "";
-    width: 100%;
-    display: inline-block;
-}
-html {
-    line-height: 1.15;
-    -webkit-text-size-adjust: 100%;
-}
+
+
