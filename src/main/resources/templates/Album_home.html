@@ -22,9 +22,14 @@
 </head>
 <body>
 <div id="root">
+    <div id="buttons" class="position-absolute top-0 end-0">
+        <button id="download-png" data-format="png" type="submit" class="btn-dark">Download PNG</button>
+        <span> </span>
+        <button id="download-jpg" data-format="jpg" type="submit">Download JPG</button>
+    </div>
 
     <div id="page">
-        <div id="sidebar">
+        <div id="fixed">
             <div id="fixed-inner">
                 <div id="customizations-container"></div>
                 <div id="search-container">
@@ -55,18 +60,84 @@
 
         </div>
 
-<!--        <div id="chart-wrapper" class="container">-->
 
-            <div id="chart">
+        <div id="chart-wrapper" style="background: center center rgb(0,0,0); transform:scale(1.33)" ;>
+            <div id="chart" style="width: 624px;">
+                <div class="card-row size-150 align-center">
+                    <div class="card" style="opacity: 1; padding: 3px;" draggable="true">
+                        <div class="inner"></div>
+                    </div>
+                    <span class="zero"> </span>
+                    <div class="card" style="opacity: 1; padding: 3px;" draggable="true">
+                        <div class="inner"></div>
+                    </div>
+                    <span class="zero"> </span>
+                    <div class="card" style="opacity: 1; padding: 3px;" draggable="true">
+                        <div class="inner"></div>
+                    </div>
+                    <span class="zero"> </span>
+                    <div class="card" style="opacity: 1; padding: 3px;" draggable="true">
+                        <div class="inner"></div>
+                    </div>
+                </div>
+                <div class="card-row size-150 align-center">
+                    <div class="card " style="opacity: 1; padding: 3px;" draggable="true">
+                        <div class="inner"></div>
+                    </div>
+                    <span class="zero"> </span>
+                    <div class="card " style="opacity: 1; padding: 3px;" draggable="true">
+                        <div class="inner"></div>
+                    </div>
+                    <span class="zero"> </span>
+                    <div class="card " style="opacity: 1; padding: 3px;" draggable="true">
+                        <div class="inner"></div>
+                    </div>
+                    <span class="zero"> </span>
+                    <div class="card " style="opacity: 1; padding: 3px;" draggable="true">
+                        <div class="inner"></div>
+                    </div>
+                </div>
+                <div class="card-row size-150 align-center">
+                    <div class="card " style="opacity: 1; padding: 3px;" draggable="true">
+                        <div class="inner"></div>
+                    </div>
+                    <span class="zero"> </span>
+                    <div class="card " style="opacity: 1; padding: 3px;" draggable="true">
+                        <div class="inner"></div>
+                    </div>
+                    <span class="zero"> </span>
+                    <div class="card " style="opacity: 1; padding: 3px;" draggable="true">
+                        <div class="inner"></div>
+                    </div>
+                    <span class="zero"> </span>
+                    <div class="card " style="opacity: 1; padding: 3px;" draggable="true">
+                        <div class="inner"></div>
+                    </div>
+                </div>
+                <div class="card-row size-150 align-center">
+                    <div class="card " style="opacity: 1; padding: 3px;" draggable="true">
+                        <div class="inner"></div>
+                    </div>
+                    <span class="zero"> </span>
+                    <div class="card " style="opacity: 1; padding: 3px;" draggable="true">
+                        <div class="inner"></div>
+                    </div>
+                    <span class="zero"> </span>
+                    <div class="card " style="opacity: 1; padding: 3px;" draggable="true">
+                        <div class="inner"></div>
+                    </div>
+                    <span class="zero"> </span>
+                    <div class="card " style="opacity: 1; padding: 3px;" draggable="true">
+                        <div class="inner"></div>
+                    </div>
+                </div>
             </div>
 
-
-<!--        </div>-->
-        <div id="buttons" class="position-absolute top-0 end-0">
-            <button id="download-png" data-format="png" type="submit" class="btn-dark">Download PNG</button>
-            <span> </span>
-            <button id="download-jpg" data-format="jpg" type="submit">Download JPG</button>
         </div>
+
+
+        <!--        </div>-->
+
     </div>
 
 </div>

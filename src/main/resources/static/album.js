@@ -1,16 +1,28 @@
 $(document).ready(function () {
     $(document).on('dragstart', '.art', function (event) {
-        event.originalEvent.dataTransfer.setData('text/plain', event.target.outerHTML);
+        var backgroundImage = $(this).find('.inner').css('background-image');
+        console.log(backgroundImage);
+
+        var regex = /url\((['"])?(.*?)\1\)/;
+        console.log(regex);
+
+        var match = backgroundImage.match(regex);
+        var imageUrl = match ? match[2] : "";
+
+
+        event.originalEvent.dataTransfer.setData('text/plain', imageUrl);
+        console.log(imageUrl);
+
     });
-    $('#chart').on('dragover', function (event) {
+    $('.card').on('dragover', function (event) {
         event.preventDefault(); // Necessary to allow dropping.
     });
 
-    $('#chart').on('drop', function (event) {
+    $('.card').on('drop', function (event) {
         event.preventDefault();
-        var data = event.originalEvent.dataTransfer.getData('text/plain');
-
-        $('#chart').append(data); // Append the image to the chart.
+        var imageUrl = event.originalEvent.dataTransfer.getData('text/plain');
+        console.log(imageUrl);
+        $(this).find('.inner').css('background-image','url('+imageUrl+')');
     });
 
     // 다운로드 관련 코드
@@ -96,7 +108,7 @@ $(document).ready(function () {
                             game.screenshots.forEach(screenshot => {
                                 var imageUrl = "https:" + screenshot.url; // Adding "https:" because the URL in the response is protocol-relative
                                 var albumHtml = '<div class="art" draggable="true">' +
-                                    '<div class="inner" style="background-image: imageUrl;"></div>' +
+                                    '<div class="inner" style="background-image: url(' + imageUrl + ');"></div>' +
                                     '</div>';
                                 $("#grow").append(albumHtml);
                                 console.log("게임 완료")
