@@ -1,15 +1,9 @@
 $(document).ready(function () {
     $(document).on('dragstart', '.art', function (event) {
         var backgroundImage = $(this).find('.inner').css('background-image');
-        console.log(backgroundImage);
-
         var regex = /url\((['"])?(.*?)\1\)/;
-        console.log(regex);
-
         var match = backgroundImage.match(regex);
         var imageUrl = match ? match[2] : "";
-
-
         event.originalEvent.dataTransfer.setData('text/plain', imageUrl);
         console.log(imageUrl);
 
@@ -22,14 +16,14 @@ $(document).ready(function () {
         event.preventDefault();
         var imageUrl = event.originalEvent.dataTransfer.getData('text/plain');
         console.log(imageUrl);
-        $(this).find('.inner').css('background-image','url('+imageUrl+')');
+        $(this).find('.inner').css('background-image', 'url(' + imageUrl + ')');
     });
 
     // 다운로드 관련 코드
 
     function downloadpng(event) {
-        var node = document.getElementById('chart');
         event.preventDefault();
+        var node = document.getElementById('chart');
         domtoimage.toPng(node)
             .then(function (dataUrl) {
                 // 이미지를 다운로드하기 위한 링크 요소를 생성합니다.
@@ -42,23 +36,13 @@ $(document).ready(function () {
             .catch(function (error) {
                 console.error('오류가 발생했습니다.', error);
             });
-    }
-    function downloadjpg(event) {
-        event.preventDefault();
-        domtoimage.toJpeg(document.getElementById('chart'), { quality: 0.95 })
-            .then(function (dataUrl) {
-                var link = document.createElement('a');
-                link.download = 'album.jpeg';
-                link.href = dataUrl;
-                link.click();
-            });
+        // html2canvas(document.querySelector("#chart")).then(canvas => {
+        //     document.body.appendChild(canvas)
+        // });
     }
 
     // 'download-png' ID를 가진 요소에 이벤트 리스너를 추가
     document.getElementById('download-png').addEventListener("click", downloadpng);
-    document.getElementById('download-jpg').addEventListener("click", downloadjpg);
-
-
 
 
     $("#new-search-container").submit(function (event) {
