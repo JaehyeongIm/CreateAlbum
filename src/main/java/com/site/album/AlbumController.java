@@ -17,6 +17,7 @@ public class AlbumController {
         this.albumService = albumService;
     }
 
+
     @GetMapping("/")
     public String albumHome(){
         return "Album_home";

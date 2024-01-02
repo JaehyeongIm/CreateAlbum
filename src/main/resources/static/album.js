@@ -24,11 +24,11 @@ $(document).ready(function () {
     function downloadpng(event) {
         event.preventDefault();
         var node = document.getElementById('chart');
-        domtoimage.toPng(node)
+        domtoimage.toJpeg(node,{cacheBust:true})
             .then(function (dataUrl) {
                 // 이미지를 다운로드하기 위한 링크 요소를 생성합니다.
                 var link = document.createElement('a');
-                link.download = 'album.png'; // 다운로드될 파일명을 지정합니다.
+                link.download = 'album.jpeg'; // 다운로드될 파일명을 지정합니다.
                 link.href = dataUrl;
                 // 링크를 클릭하여 이미지를 다운로드합니다.
                 link.click();
@@ -36,9 +36,10 @@ $(document).ready(function () {
             .catch(function (error) {
                 console.error('오류가 발생했습니다.', error);
             });
-        // html2canvas(document.querySelector("#chart")).then(canvas => {
-        //     document.body.appendChild(canvas)
-        // });
+        var canvas = document.getElementById("chart");
+        canvas.toBlob(function(blob) {
+            saveAs(blob, "pretty image.png");
+        });
     }
 
     // 'download-png' ID를 가진 요소에 이벤트 리스너를 추가
@@ -190,6 +191,7 @@ $(document).ready(function () {
             });
 
         } else if (selectedType === "webtoon") {
+
             url = `https://korea-webtoon-api.herokuapp.com/search?keyword=${searchTerm}`
             $.ajax({
                 url: url,
